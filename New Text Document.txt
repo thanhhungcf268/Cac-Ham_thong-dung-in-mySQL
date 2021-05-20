@@ -1,0 +1,18 @@
+use quan_ly_sinh_vien;
+
+select Address ,count(StudentID) from student group by Address;
+
+SELECT S.StudentId,S.StudentName, AVG(Mark)
+FROM Student S inner join Mark M on S.StudentId = M.StudentId
+GROUP BY S.StudentId, S.StudentName
+having AVG(Mark) >= ANY (select AVG(Mark) from mark );
+
+select * from subjects
+where Credit >= all (select Credit from subjects);
+
+select s.SubId,SubName,Credit,Status from subjects s  join mark m on s.SubId = m.SubId
+where Mark >= all (select Mark from mark);
+
+select StudentName, AVG(Mark) from student s join mark m on s.StudentID = m.StudentId
+group by StudentName
+order by AVG(Mark) desc;
